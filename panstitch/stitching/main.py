@@ -29,4 +29,4 @@ panorama = stitcher.stitch(files)
 
 im = Image.fromarray(panorama)
 im.save("panorama.jpeg")
-im.show() # this displays image but increases runtime. comment out line to increase program efficiency.
+#im.show() # this displays image but increases runtime. comment out line to increase program efficiency.

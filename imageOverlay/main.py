@@ -1,28 +1,45 @@
 # Adam Friesz, Husky Robotics
-# Last Updated 1/20/24
+# Last Updated 2/2/24
 
-# This class implements functions from overlay.py to display user or file input over the 
-# given image file in a reasonable size in the bottom right corner. 
-# The larger the given image file the longer the program will take to execute, a reasonable
-# upper limit is 1.75 seconds. Linear increase in time based on number of pixels.
+# This class implements functions from overlay.py and imgdata.py to guide user's through 
+# overlaying gps coordinates and scalebars on a given image.
 
-from overlay import overlay_text
+from overlay import overlayText, overlayScalebar
 from imgdata import get_gps_location, set_gps_location
 from PIL import Image
 
-#under = Image.open(input("Background image: "))
-#text = read_json(input("Text file to display: "))
-#text = input("Input text: ")
+mode = ""
+print("This program allows users to add gps and scalebar information to their image.")
+filepath = input("What image would you like to work with? Paste filepath: ")
+print("\n")
 
-file = "exImages/P1030462.JPG"
-latitude = 38.8951 
-longitude = -77.0364
-altitude = 1.1234
-set_gps_location(file, latitude, longitude, altitude)
-print(get_gps_location(file))
+while (mode != 'quit'):
+    mode = input("Would you like to use the (gps) or (scalebar)? ")
+    if mode == 'gps':
+        a = input("  Would you like to (read), (write), or (overlay) gps info? ")
+        if a == 'read':
+            try:
+                print(get_gps_location("     " + filepath))
+            except:
+                print("     No GPS data is written on this file.")
+        elif a == 'write':
+            lat = float(input("     Latitude? "))
+            lng = float(input("     Longitude? "))
+            alt = float(input("     Altitude? "))
+            set_gps_location(filepath, lat, lng, alt)
+            print("     GPS written: " + get_gps_location(filepath))
+        elif a == 'overlay':
+            newpath = filepath[: filepath.index('.')] + '-gps.jpg'
+            img = overlayText(Image.open(filepath), get_gps_location(filepath), 'br')
+            img.save(newpath)
+            print("     Image saved as: " + newpath)
+    elif mode == 'scalebar':
+        img = overlayScalebar(Image.open(filepath), 'br')
+        newpath = filepath[: filepath.index('.')] + '-scalebar.jpg'
+        img.save(newpath)
+        print("     Image saved " + newpath)
+    else:
+        print("Invalid input.")
 
-under = Image.open(file)
-text = get_gps_location(file)
-
-final = overlay_text(under, text)
-final.save("exImages/composite.jpg");
+    print("\n")
+    mode = input("Would you like to (continue) or (quit)?")
