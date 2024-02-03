@@ -1,9 +1,8 @@
 # Adam Friesz, Husky Robotics
-# Last Updated 1/20/24
+# Last Updated 1/31/24
 
-# This package includes functions related to creating and displaying text over existing image files
-# overlay_text combines the functionality of most of the other functions to make the user experience
-# as easy as possible.
+# This code was an attempt at implementing a class-based overlay package.
+# Currently not working.
 
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 import numpy
