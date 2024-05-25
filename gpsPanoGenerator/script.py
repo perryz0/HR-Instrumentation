@@ -36,9 +36,9 @@ class GPSHandler:
         return newpath
 
 def get_real_time_gps():
-    # Placeholder function to fetch real-time GPS coordinates.
-    # Replace with actual implementation of WebSocket communication to get GPS data.
-    # Example return: (latitude, longitude, altitude)
+    # placeholder function to fetch real-time GPS coordinates.
+    # replace with actual implementation of WebSocket communication stuff to get GPS data.
+    # return: (latitude, longitude, altitude)
     return (47.6062, -122.3321, 15.0)
 
 if len(sys.argv) != 2:
