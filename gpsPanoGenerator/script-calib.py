@@ -1,9 +1,9 @@
 # Perry Chien
 # WIP refined version of the stitching script. Trying to address the color change issue
-# (i.e. yellowish to blueish for no reason)
+# (i.e. yellowish to blueish for no reason). This ver is compatible with newly calibrated
+# cam (i.e. takes distortion params)
 
 import sys
-from stitching import Stitcher
 import cv2
 import numpy as np
 import os
@@ -87,8 +87,21 @@ if len(sys.argv) != 2:
 path = sys.argv[1]
 files = [os.path.join(path, f) for f in os.listdir(path) if f.endswith('.jpg')]
 
-# Load images
-images = [cv2.imread(f) for f in files]
+# Load calibration data
+calibration_data = np.load('camera_calib.npz')
+camera_matrix = calibration_data['camera_matrix']
+dist_coeffs = calibration_data['dist_coeffs']
+
+# Load and undistort images
+images = []
+for f in files:
+    img = cv2.imread(f)
+    h, w = img.shape[:2]
+    new_camera_matrix, roi = cv2.getOptimalNewCameraMatrix(camera_matrix, dist_coeffs, (w, h), 1, (w, h))
+    undistorted_img = cv2.undistort(img, camera_matrix, dist_coeffs, None, new_camera_matrix)
+    x, y, w, h = roi
+    undistorted_img = undistorted_img[y:y+h, x:x+w]
+    images.append(undistorted_img)
 
 # Normalize image colors
 normalized_images = normalize_image_colors(images)
