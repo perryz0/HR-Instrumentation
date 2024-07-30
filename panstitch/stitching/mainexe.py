@@ -9,6 +9,9 @@
 from stitching import Stitcher # Open Stitching uses OpenCV to create panorama
 import os # os allows us to read the file names inside our selected folder
 from PIL import Image # pillow allows us to turn the numpy.array that OpenStitching creates into a jpg
+import numba
+
+numba.config.DISABLE_JIT = True  # Disable Numba JIT caching
 
 path = input("Image folder path: ")
 files = []
