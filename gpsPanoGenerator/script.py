@@ -11,29 +11,10 @@ from PIL import Image
 import numba
 from overlay import overlayText
 from imgdata import set_gps_location, get_gps_location
+from gps_handler import GPSHandler
 
-numba.config.DISABLE_JIT = True  # Disable Numba JIT caching
-
-# inner GPSHandler class to help with GPS overlay onto pano
-class GPSHandler:
-    def __init__(self, filepath):
-        self.filepath = filepath
-
-    def read_gps(self):
-        try:
-            return get_gps_location(self.filepath)
-        except:
-            return "No GPS data is written on this file."
-
-    def write_gps(self, lat, lng, alt):
-        set_gps_location(self.filepath, lat, lng, alt)
-        return get_gps_location(self.filepath)
-
-    def overlay_gps(self, gps_data):
-        newpath = self.filepath[:self.filepath.index('.')] + '-gps.jpg'
-        img = overlayText(Image.open(self.filepath), gps_data, 'br')
-        img.save(newpath)
-        return newpath
+# disable Numba JIT caching (resolved debugger issue), check back later
+numba.config.DISABLE_JIT = True
 
 def get_real_time_gps():
     # placeholder function to fetch real-time GPS coordinates.
