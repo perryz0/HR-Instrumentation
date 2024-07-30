@@ -6,7 +6,7 @@ from fractions import Fraction
 def to_deg(value, loc):
     """convert decimal coordinates into degrees, munutes and seconds tuple
 
-    Keyword arguments: value is float gps-value, loc is direction list ["S", "N"] or ["W", "E"]
+    Keyword args: value is float gps-value, loc is direction list ["S", "N"] or ["W", "E"]
     return: tuple like (25, 13, 48.343 ,'N')
     """
     if value < 0:
@@ -26,7 +26,7 @@ def to_deg(value, loc):
 def change_to_rational(number):
     """convert a number to rational
 
-    Keyword arguments: number
+    Keyword args: number
     return: tuple like (1, 2), (numerator, denominator)
     """
     f = Fraction(str(number))
@@ -37,7 +37,7 @@ def set_gps_location(file_name, lat, lng, altitude):
     """Adds GPS position as EXIF metadata
         # GPS data will be stored in degrees, minutes, seconds format
 
-    Keyword arguments:
+    Keyword args:
     file_name -- image file
     lat -- latitude (as float)
     lng -- longitude (as float)
