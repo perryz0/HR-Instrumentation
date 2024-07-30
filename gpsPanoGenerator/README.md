@@ -11,4 +11,4 @@ There are currently 3 versions of the script:
     - *Camera calibration is the process of extracting distortion params for a camera with lens distortion, learn more from [OpenCV](https://docs.opencv.org/4.x/dc/dbb/tutorial_py_calibration.html)*
 
 
-If you are currently testing/refining this GPS Pano Generator script, please use version control and ask @verd on Discord for Github access (ask anything related to this too). Thanks!
+If you are currently testing/refining this GPS Pano Generator script, please use version control and ask @1verd on Discord for Github access (ask anything related to this too). Thanks!
