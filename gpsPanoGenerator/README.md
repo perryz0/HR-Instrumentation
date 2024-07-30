@@ -9,3 +9,6 @@ There are currently 3 versions of the script:
 - script-v2.py: Similar to the most basic, but addressing color-change issue with color normalization
 - script-calib.py: Does exactly what script-v2 does, but must be ran after calibration.py (extracts cam calib params)
     - *Camera calibration is the process of extracting distortion params for a camera with lens distortion, learn more from [OpenCV](https://docs.opencv.org/4.x/dc/dbb/tutorial_py_calibration.html)*
+
+
+If you are currently testing/refining this GPS Pano Generator script, please use version control and ask @verd on Discord for Github access (ask anything related to this too). Thanks!
