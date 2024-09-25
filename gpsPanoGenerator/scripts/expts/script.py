@@ -9,9 +9,9 @@ from stitching import Stitcher
 import os
 from PIL import Image
 import numba
-from overlay import overlayText
-from imgdata import set_gps_location, get_gps_location
-from gps_handler import GPSHandler
+from src.image_processing.overlay import overlayText
+from src.image_processing.imgdata import set_gps_location, get_gps_location
+from src.gps.gps_handler import GPSHandler
 
 # disable Numba JIT caching (resolved debugger issue), check back later
 numba.config.DISABLE_JIT = True

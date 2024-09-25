@@ -12,10 +12,10 @@ import numpy as np
 import os
 import numba
 from PIL import Image
-from overlay import overlayText
-from imgdata import set_gps_location, get_gps_location
+from src.image_processing.overlay import overlayText
+from src.image_processing.imgdata import set_gps_location, get_gps_location
 from matplotlib import pyplot as plt
-from gps_handler import GPSHandler
+from src.gps.gps_handler import GPSHandler
 
 # disable Numba JIT caching (resolved debugger issue), check back later
 numba.config.DISABLE_JIT = True
@@ -43,11 +43,6 @@ def stitch_images(images):
     if status != cv2.Stitcher_OK:
         raise Exception("Error during stitching process")
     return stitched
-
-def get_real_time_gps():
-    # placeholder function to fetch real-time GPS coordinates.
-    # replace with actual implementation of WebSocket communication stuff to get GPS data.
-    return (47.6062, -122.3321, 15.0)
 
 if len(sys.argv) != 2:
     print("Usage: python script-v2.py <Image folder path>")

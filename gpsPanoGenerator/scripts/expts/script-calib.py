@@ -12,10 +12,10 @@ import numpy as np
 import os
 import numba
 from PIL import Image
-from overlay import overlayText
-from imgdata import set_gps_location, get_gps_location
+from src.image_processing.overlay import overlayText
+from src.image_processing.imgdata import set_gps_location, get_gps_location
 from matplotlib import pyplot as plt
-from gps_handler import GPSHandler
+from src.gps.gps_handler import GPSHandler
 
 # disable Numba JIT caching (resolved debugger issue), check back later
 numba.config.DISABLE_JIT = True
