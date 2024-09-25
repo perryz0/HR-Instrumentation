@@ -3,8 +3,10 @@
 # GPS coordinates on an image. 
 
 from PIL import Image
-from overlay import overlayText
-from imgdata import set_gps_location, get_gps_location
+from image_processing.overlay import overlayText
+from image_processing.imgdata import set_gps_location, get_gps_location
+
+import gpsd
 
 class GPSHandler:
     def __init__(self, filepath):
@@ -40,4 +42,27 @@ class GPSHandler:
                 return None
         except Exception as e:
             print(f"Error overlaying GPS data: {e}")
+            return None
+        
+    def get_real_time_gps(self):
+        """
+        Check out https://github.com/huskyroboticsteam/Resurgence/tree/master/src/gps
+        to install and initialize gpsd setup
+        """
+        try:
+            # Connect to the gpsd service running on localhost
+            gpsd.connect()
+
+            # Get the latest GPS data packet
+            packet = gpsd.get_current()
+
+            # Extract latitude, longitude, and altitude
+            latitude = packet.lat
+            longitude = packet.lon
+            altitude = packet.alt
+
+            # Return the GPS coordinates
+            return latitude, longitude, altitude
+        except Exception as e:
+            print(f"Error fetching GPS data: {e}")
             return None
